@@ -1,0 +1,742 @@
+<!-- Created by Aditya -->
+
+
+<!-- Created by ☆Monu☆ and Aditya
+
+Features:
+     - This is bascially a quiz app made for fun.Start the quiz by clicking the start button.
+     - Use next button for next question and prev button to return previous question .
+     - Music button
+     - Dark mode  
+     - Don't copy without permission.....)
+     -Made with ❤️. Hope you like it ....)'-->
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Quiz app </title>
+   </head>
+   <style>
+         /* Created by Aditya */
+
+/* Css */
+
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+*,
+*::before,
+*::after{
+   padding:0;
+   margin:0;
+   box-sizing:border-box;
+}
+:root{
+   --mode-color:#60bfbf;
+   --dot-color:white;
+   --txt:#fff;
+   --trans:rgba(0,0,0,.1);
+}
+
+*{
+    -webkit-tap-highlight-color: transparent;
+}
+
+button{
+   display:block;
+   background:transparent;
+   border:0;
+   color:var(--txt);
+   cursor:pointer;
+}
+html{
+   align-items:center;
+   -webkit-box-align:center;
+}
+html,body{
+   font-size:18px;
+   height:100%;
+}
+body{
+   background:var(--mode-color);
+   width:100%;
+   position:relative;
+   max-height:700px;
+}
+section{
+   height:100%;
+   width:100%;
+   position:relative;
+   overflow:scroll;
+   z-index:5;
+   transition:left .5s;
+   -webkit-transition:left .5s;
+   background-color: var(--mode-color);
+   background-image:radial-gradient(var(--dot-color) 5px,transparent 5px);
+   background-image: -webkit-radial-gradient(var(--dot-color) 5px,transparent 5px);
+   background-size:2.5rem 2.5rem;
+}
+#main,#resultPg,#loadPg{
+   position:absolute;
+   top:0;
+   left:100%;
+   z-index:10;
+   display:none;
+}
+#loading1
+{
+    width:200px;
+    height:200px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    background:var(--mode-color);
+    box-shadow:0 0 0 1.5rem var(--mode-color);
+    margin-left:-100px;
+    margin-top:-100px;
+    border:9px solid var(--txt);
+    border-radius:50%;
+    border-top-color:var(--mode-color);
+    border-bottom-color:var(--mode-color);
+    animation: animate 3s linear infinite;
+}
+#loading2{
+    width:150px;
+    height:150px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-75px;
+    margin-top:-75px;
+    border-radius:50%;
+    text-align:center;
+    border:8px solid var(--txt);
+    border-top-color:var(--mode-color);
+    border-bottom-color:var(--mode-color);
+    animation:animate 2s linear infinite ;
+    animation-delay:500ms;
+}
+#loading3{
+    width:100px;
+    height:100px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-50px;
+    margin-top:-50px;
+    border-radius:50%;
+    text-align:center;
+    border:7px solid var(--txt);
+    border-top-color:var(--mode-color);
+    border-bottom-color:var(--mode-color);
+    animation:animate 2s linear infinite ;
+    animation-delay:1s;
+}
+#centr{
+   width:80px;
+   height:80px;
+   position:absolute;
+   left:50%;
+   top:50%;
+   margin:-40px 0 0 -40px;
+   text-align:center;
+   color:var(--txt);
+   font-size:1.3rem;
+   padding-top:.6rem;
+   letter-spacing:1px;
+   font-weight:bolder;
+   animation:blink 1.5s infinite linear;
+}
+
+@keyframes animate
+{
+    0%
+    {
+        transform:rotate(0deg);
+    }
+    100%
+    {
+        transform:rotate(360deg);
+    }
+}
+@keyframes ani
+{
+    0%
+    {
+      font-size:15px;
+      color:#610ce8;
+    }
+    50%
+    {
+        font-size:12px;
+        color:#9933cc;
+    }
+    100%
+    {
+        font-size:15px;
+        color:#008074;
+    }
+}
+@keyframes blink{
+  0%,1%,5%,10%,15%,30%{
+    opacity:0.4;
+  }
+  30%,3%,8%,13%,20%{
+    opacity:6;
+  }
+}
+.heading{
+  text-align:center;
+  font-size:3rem;
+  font-family: 'Gideon Roman', cursive;
+  font-weight:bolder;
+  background:var(--trans);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:.4rem 0;
+  color:#f8f8f8;
+  margin:.6rem 1.5rem 1rem;
+  border-radius:.8rem;
+  
+}
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+#top{
+   height:1rem;
+   margin:3.2rem .8rem .25rem;
+   border:3px var(--txt) solid;
+   border-radius:1rem;
+   position:relative;
+   padding:.1rem;
+   font-weight:bold;
+   text-align:center;
+   background:var(--trans);
+   backdrop-filter:blur(8px);
+   -webkit-backdrop-filter:blur(8px);
+}
+#QNum{
+   width:3rem;
+   height:3rem;
+   background:var(--txt);
+   padding:.65rem 0;
+   font-size:1.5rem;
+   border-radius:50%;
+   position:absolute;
+   color:orange;
+   box-shadow:0 1px 4px #999;
+   z-index:5;
+   left:50%;
+   top:0%;
+   transform:translate(-50%,-92%);
+   -webkit-transform:translate(-50%,-92%)
+}
+#prog{
+   height:100%;
+   position:relative;
+   width:0;
+   left:0;
+   top:0;
+   border-radius:1rem;
+   background:var(--txt);
+   transition:width .3s;
+   -webkit-transition:width .3s;
+   z-index:3;
+}
+#top>span{
+   display:inline-block;
+   position:relative;
+   top:-2.8rem;
+   padding:.2rem .5rem ;
+   border-radius:.8rem;
+   margin:0 13%;
+   color:var(--txt);
+   font-size:1.4rem;
+   background:var(--trans);
+   backdrop-filter:blur(15px);
+   -webkit-backdrop-filter:blur(15px);
+}
+#queWrap{
+   width:100%;
+   position:relative;
+}
+#que{
+   color:#444;
+   min-height:3rem;
+   padding:0 .8rem;
+}
+#queCont{
+   position:relative;
+   margin:1.3rem auto;
+   background:var(--txt);
+   padding:1.5rem 0 1rem;
+   width:90%;
+   box-shadow: 0 .8rem 1.8rem rgba(0, 41, 22, 0.4);
+   text-align:center;
+   font-family: 'Oswald', sans-serif;
+   border-radius:.4rem;
+   font-size:1.1rem;
+   overflow:hidden;
+}
+.opt{
+   width:85%;
+   background:#232323;
+   border-radius:3rem;
+   height:2.5rem;
+   margin:.75rem auto;
+   font-size:.85rem;
+}
+#chngBtn,#resultBox>p,html{
+   display:flex;
+   display:-webkit-box;
+   justify-content:justify;
+   -webkit-box-pack:justify;
+}
+#chngBtn{
+   padding:.5rem 6%;
+}
+#chngBtn>button,#submit,.btn{
+   background:var(--txt);
+   width:4.5rem;
+   height:2.3rem;
+   color:black;
+   font-size:.9rem;
+   font-weight:bold;
+   box-shadow:0 .25rem .7rem rgba(0,24,41,.35);
+}
+#prev{
+   border-radius:2rem .3rem .3rem 2rem;
+   padding-left:.5rem;
+}
+#nxt{
+   border-radius:.3rem 2rem 2rem .3rem;
+   padding-right:.5rem;
+}
+#submit{
+   width:6rem;
+   border-radius:2rem;
+   margin:.2rem auto;
+}
+#resultBox{
+   width:80%;
+   background:var(--trans);
+   backdrop-filter:blur(8px);
+   -webkit-backdrop-filter:blur(8px);
+   text-align:center;
+   border-radius:.6rem;
+   margin:2.5rem auto 1rem;
+   word-spacing:.3rem;
+   color:var(--txt);
+   padding:.5rem 10% 1rem;
+   box-shadow: 0 .8rem 2rem rgba(0, 41, 22, 0.4);
+}
+#resultBox>h2{
+   padding:.6rem 0;
+   color:var(--txt);
+   text-decoration:underline;
+   letter-spacing:1px;
+}
+#resultBox>p{
+   margin:1rem 0;
+}
+#resultBox>p>span{
+   display:block;
+}
+#resultBox>p>b{
+   display:block;
+   flex:1;
+   -webkit-box-flex:1;
+}
+.btn{
+   padding:.8rem 1.5rem;
+   border-radius:3rem;
+   width:auto;
+   height:auto;
+   color:orange;
+   margin:2rem auto;
+   text-transform:uppercase;
+}
+#replay{
+   margin:3rem auto -1rem;
+}
+.btnCont{
+   position:absolute;
+   bottom:0;
+   width:100%;
+}
+#start{
+   padding:.8rem 2rem;
+   font-size:1rem;
+}
+#mus{
+   width:3rem;
+   height:3rem;
+   padding:0;
+   font-size:1.2rem;
+   margin:-1rem auto 1.5rem;
+}
+#logo{
+   position:relative;
+   display:block;
+   margin:1rem auto 0;
+   width:95%;
+   height:auto;
+   box-shadow:0 .4rem .8rem rgba(0,24,41,.4);
+   border-radius:3rem .5rem 3rem .5rem;
+}
+#loadPg{
+   left:0;
+   z-index:15;
+   display:block;
+}
+#mode{
+   position:absolute;
+   top:0;
+   right:0;
+   padding:0;
+   width:2.5rem;
+   height:2.5rem;
+   font-size:1rem;
+   margin:.7rem .7rem 0 0;
+   box-shadow:0 0 .8rem #555;
+}
+.light{
+   background:white;
+}
+.dark{
+   background:#333;
+}
+   </style> 
+   <body>
+    <!---Loader Page---->
+    <section id="loadPg">
+       <div id="loading1"></div>
+       <div id="loading2"></div>
+       <div id="loading3"></div>
+       <div id="centr">Quiz<br>App</div>
+    </section>
+    <!---first Page--->
+    <section id="firstPg">
+    
+       <h2 class="heading">Quiz App</h2>
+       <img id="logo" src="https://dl.dropbox.com/s/ywtlewlkg3rgicp/question-mark_1150-39362.jpg">
+       <div class="btnCont">
+          <button class="btn" id="start">Start</button>
+          <button class="btn" id="mus">🎶</button>
+
+       </div>
+       <button class="btn dark" id="mode">🌙</button>
+    </section>
+    
+    <!---Quiz Page---->
+    <section id="main">
+       <div id="top">
+         <p id="QNum">1</p>
+         <div id="prog"></div>
+         <span>Quiz</span>
+         <span>App</span>
+       </div> 
+       <div id="subHead"></div>
+       <div id="queCont">
+          <div id="queWrap">
+             <p id="que">What's the number of bones in a baby?</p>
+             <button class="opt">206</button>
+             <button class="opt">300</button>
+             <button class="opt">250</button>
+             <button class="opt">205</button>
+          </div>
+       </div>
+       <div id="chngBtn">
+          <button id="prev">Prev</button>
+          <button id="nxt">Next</button>
+       </div>
+       <button id="submit">SUBMIT</button>
+    </section>
+    
+    <!----Result Page----->
+    <section id="resultPg" class="slideL">
+       <h2 class="heading">QUIZ APP</h2>
+       <div id="resultBox">
+          <h2>RESULT</h2>
+          <p><b>Total</b><span>:</span><b>10</b></p>
+          <p><b>Attempted</b><span>:</span><b id="atmptd"></b></p>
+          <p><b>Correct</b><span>:</span><b id="crct"></b></p>
+          <p><b>Incorrect</b><span>:</span><b id="incrct"></b></p>
+       </div>
+       <button class="btn" id="replay">Replay</button>
+       <button class="btn" onclick="home()">Go to Home</button>
+    </section>
+    <audio id="audio" src="https://dl.dropbox.com/s/k6btbfr92sftbhj/faded_instrumental.mp3"></audio>
+<script type="text/javascript">
+alert ("Write your scores in the commemts....")
+   //---Variables Declaration---//
+   var mode = document.querySelector("#mode"),
+   mus = document.querySelector("#mus"),
+   audio = document.querySelector("#audio"),
+   loadPg = document.querySelector("#loadPg"),
+   firstPg = document.querySelector("#firstPg"),
+   start = document.querySelector("#start"),
+replay = document.querySelector("#replay"),
+   incrct = document.querySelector("#incrct"),
+   crct = document.querySelector("#crct"),
+   atmptd = document.querySelector("#atmptd"),
+   main = document.querySelector("#main"),
+   resultPg = document.querySelector("#resultPg"),
+   queWrap = document.querySelector("#queWrap"),
+   progress = document.querySelector("#prog"),
+   qNum = document.querySelector("#QNum"),
+   chngBtn = document.querySelector("#chngBtn"),
+   nxt = document.querySelector("#nxt"),
+   prev = document.querySelector("#prev"),
+   que = document.querySelector("#que"),
+   opt = document.querySelectorAll(".opt");
+   const body = document.body;
+   
+   //---Questions & Answers Object Array----//
+   const ques = [
+      { question : " શીલવંત સાધુને ભજન કોને લખ્યું છે ?",
+        opt1 : "પાનબાઈ",
+        opt2 : "મીરાબાઈ",
+        opt3 : "અહલ્યાબાઈ",
+        opt4 : "ગંગાસતી",
+        ans : "ગંગાસતી"
+      },
+      { question : "ગંગા સતીનો જન્મ ક્યાં જીલ્લામાં થયો હતો ?",
+           opt1 : "જામનગર",
+           opt2 : "ભાવનગર",
+           opt3 : "અમરેલી",
+           opt4 : "જુનાગઢ",
+           ans : "ભાવનગર"
+      },
+      { question : "નીચેના માંથી કયો અર્થ શીલવંત નો નથી થતો ?",
+        opt1 : "શીલવાળું",
+        opt2 : "ચારિત્ર્યવાન",
+        opt3 : "સદાચારી",
+        opt4 : "લજ્જાવાન",
+        ans : "લજ્જાવાન"
+      },
+      { question : "રઘુવીર ચૌધરીનો જન્મ ક્યાં જીલ્લા માં થયો હતો ?",
+        opt1 : "જામનગર",
+        opt2 : "ગાંધીનગર",
+        opt3 : "ભાવનગર",
+        opt4 : "બનાસકાઠા",
+        ans : "ગાંધીનગર"
+      },
+      { question : " કોણ ગરોળી થી પણ ડરી જાય એવું હતું ?",
+        opt1 : "નરેન",
+        opt2 : "મનીષા",
+        opt3 : "સલોની",
+        opt4 : "આનંદ",
+        ans : "મનીષા"
+      },
+      { question : "ગોપિત શબ્દનો સમાનર્થી જણાવો",
+        opt1 : "ગોપી",
+        opt2 : "છુપી",
+        opt3 : "જાહેર",
+        opt4 : "દેખીતું",
+        ans : "ગોપી"
+      },
+      { question : "મનીષા દેસાઈ એ સુરતના કુટુંબને કોના હુમલાથી બચાવ્યું હતું ?",
+        opt1 : "હાથીના",
+        opt2 : "સિંહના",
+        opt3 : "રીંછના",
+        opt4 : "કુતરાના",
+        ans : "રીંછના"
+      },
+      { question : "શરમ શબ્દનો વિરોધાર્થી શબ્દ જણાવો.",
+        opt1 : "લજ્જા",
+       opt2 : "બીક",
+        opt3 : "બેશરમ",
+        opt4 : "અશર્મ",
+        ans : "બેશરમ"
+      },
+      { question : "અશોક ચાવડાનું ઉપનામ જણાવો",
+        opt1 : "બેશરમ",
+        opt2 : "આદીલ",
+        opt3 : "બેદિલ",
+        opt4 : "દિલ",
+        ans : "બેદિલ"
+      },
+      { question : "અશોક ચાવડાનો જન્મ ક્યાં જીલ્લામાં થયો હતો ?",
+        opt1 : "સુરેન્દ્રનગર",
+        opt2 : "જામનગર",
+        opt3 : "ભાવનગર",
+        opt4 : "મોરબી",
+        ans : "સુરેન્દ્રનગર"
+      },
+      
+   ]
+   
+   //---User selection Array---//
+   var selections = new Array(ques.length).fill(" ");
+   
+   //---Adding Listener to Next & Prev Buttons----//
+   nxt.addEventListener("click",vibrt)
+   prev.addEventListener("click",vibrt)
+   nxt.addEventListener("click",function(){
+      if(n<ques.length-1){
+         n++;
+         showQuestion(n);
+      }
+      else{}
+   })
+   prev.addEventListener("click",function(){
+      if(n>0){
+         n--;
+         showQuestion(n);
+      }
+      else{}
+   })
+   
+   
+   //---Question Changer----//
+   var n = 0;
+   function showQuestion(n){
+      qNum.innerHTML = n+1;
+      prog.style.width = (n+1)/ques.length*100+"%";
+      
+      for(i=0; i<opt.length;i++){
+         opt[i].innerHTML = ques[n]["opt"+(i+1)];
+         opt[i].style.background="black";
+      }
+      if(selections[n].innerHTML!=" "){
+         for(j=0;j<opt.length;j++){
+            if(opt[j].innerHTML==selections[n]){
+               opt[j].style.background="orange";
+            }
+         }
+      }
+      que.innerHTML = ques[n].question;
+   }
+   showQuestion(0);
+
+   //----Option Selecting Function----//
+
+   for(i=0;i<opt.length;i++){
+     opt[i].addEventListener("click",function(){
+        body.style.backgroundColor = "orange";
+        for(j=0;j<opt.length;j++){
+          opt[j].style.backgroundColor="#222";
+        }
+        selections[n] = this.innerHTML;
+        this.style.backgroundColor="orange";
+     })
+   }
+   
+   //---Submit----//
+   var correct = 0, incorrect = 0, attempted=0;
+   submit.addEventListener("click",function(){
+      resultPg.style.display="block";
+      setTimeout(function(){resultPg.style.left="0"});
+      for(k=0;k<ques.length;k++){
+         if(selections[k]==ques[k].ans){
+            correct++;
+            attempted++;
+         }
+         else if(selections[k]!=" "){
+            incorrect++;
+            attempted++;
+         }
+      }
+      crct.innerHTML = correct;
+      incrct.innerHTML = incorrect;
+      atmptd.innerHTML = attempted;
+      
+      setTimeout(function(){
+         main.style.display="none";
+      },500)
+   })
+   
+   //---Replay----//
+   replay.addEventListener("click",rplay)
+   function rplay(){
+      selections.fill(" ")
+      for(i=0;i<opt.length;i++){
+         opt[i].style.background="black";
+      }
+      resultPg.style.left="100%";
+      n=0,attempted=0,correct=0,incorrect=0;
+      showQuestion(0);
+      main.style.display="block";
+      setTimeout(function(){
+         resultPg.style.display="none";
+      },500)
+   }
+   
+   //---Start----//
+   start.addEventListener("click",function(){
+      main.style.display="block";
+      main.style.left="100%"
+      setTimeout(function(){
+         main.style.left="0";
+      })
+      setTimeout(function(){
+         firstPg.style.display="none"
+      },500)
+      rplay();
+   })
+   
+   //---Home function----//
+   function home(){
+      firstPg.style.display="block";
+      resultPg.style.left="100%";
+      setTimeout(function(){
+         resultPg.style.display="none";
+      },500)
+   }
+   
+   //---Audio----//
+   mus.addEventListener("click",music)
+   function music(){
+      if(audio.paused){
+         audio.play();
+         mus.style.background="#ffa";
+      }
+      else{
+         audio.pause();
+         mus.style.background="var(--txt)";
+      }
+   }
+   
+   //---Vibrator---//
+   function vibrt(bs){navigator.vibrate("75");}
+   
+   //---Loading----//
+   setTimeout(function(){
+      loadPg.style.left="-100%";
+      setTimeout(function(){
+         loadPg.style.display="none";
+      },500)
+   },6000)
+   
+   //----Mode Changer------//
+   var root = document.querySelector(":root");
+   mode.addEventListener("click",function(){
+      
+      if(mode.classList.contains("dark")){
+         root.style.setProperty("--mode-color","#013");
+         root.style.setProperty("--dot-color","#308a8a");
+         root.style.setProperty("--txt","#eef");
+         root.style.setProperty("--trans","rgba(255,255,255,.1)")
+         mode.className="btn light";
+         mode.innerHTML ="🔆";
+      }
+      else{
+         root.style.setProperty("--mode-color","#60bfbf");
+         root.style.setProperty("--dot-color","white");
+         root.style.setProperty("--txt","#fff");
+         root.style.setProperty("--trans","rgba(0,0,0,.1)")
+         mode.className="btn dark";
+         mode.innerHTML ="🌙";
+      }
+      
+   })
+   
+   
+</script>
+   </body>
+</html>
